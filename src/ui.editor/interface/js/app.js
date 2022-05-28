@@ -65,6 +65,10 @@ window.axiosProxy = {
             return "service.queue";
         }
 
+        if (url.indexOf(window.hosts.blob) !== -1) {
+            return "service.blob";
+        }
+
         return "unknown";
     },
     _normalisePath : (url) => {
@@ -174,7 +178,10 @@ window.templates.fetchTemplates().then(window.fetchRoles).then(() => {
         "js/pages/queueDetails.js",
         "js/pages/queueEditor.js",
         "js/pages/monitor.js",
-        "js/pages/tagsetEditor.js"
+        "js/pages/tagsetEditor.js",
+        "js/pages/blobStorage.js",
+        "js/pages/blobEditor.js",
+        "js/pages/blobDetails.js",
     ];
 
     const loadPage = (file) => {
@@ -348,6 +355,22 @@ window.templates.fetchTemplates().then(window.fetchRoles).then(() => {
                 path 		: "/messaging/:name",
                 name 		: "queueDetails",
                 component 	: window.QueueDetails
+            },
+            /* Blob storage */
+            {
+                path        : '/blob',
+                name        : 'blobStorage',
+                component   : window.BlobStorage
+            },
+            {
+                path        : '/blob/editor/:name',
+                name        : 'blobEditor',
+                component   : window.BlobEditor
+            },
+            {
+                path        : '/blob/:name',
+                name        : 'blobDetails',
+                component   : window.BlobDetails
             }
         ];
 
